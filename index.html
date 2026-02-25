@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minesweeper</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app" aria-live="polite">
+      <header class="topbar">
+        <h1>Minesweeper</h1>
+        <div class="presets" role="group" aria-label="Difficulty presets">
+          <button class="preset" data-level="beginner" type="button">Beginner</button>
+          <button class="preset" data-level="intermediate" type="button">Intermediate</button>
+          <button class="preset" data-level="expert" type="button">Expert</button>
+          <button class="preset" data-level="custom" type="button">Custom</button>
+        </div>
+      </header>
+
+      <section class="controls" aria-label="Custom board settings">
+        <label>Rows <input id="rows" type="number" min="6" max="24" value="9" /></label>
+        <label>Cols <input id="cols" type="number" min="6" max="30" value="9" /></label>
+        <label>Mines <input id="mines" type="number" min="5" value="10" /></label>
+        <button id="new-game" type="button">New game</button>
+      </section>
+
+      <section class="hud">
+        <p>⛳ Mines left: <span id="mine-count">000</span></p>
+        <button id="reset-face" class="face" type="button" aria-label="Restart game">🙂</button>
+        <p>⏱ Time: <span id="timer">000</span></p>
+      </section>
+
+      <p id="message" class="message">Left-click to reveal, right-click to flag, double-click number to chord.</p>
+      <section id="board" class="board" aria-label="Minesweeper board"></section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
