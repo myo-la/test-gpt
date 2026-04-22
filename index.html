@@ -3,36 +3,55 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Minesweeper</title>
+    <title>Star Miner: Tractor Frontier</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <main class="app" aria-live="polite">
       <header class="topbar">
-        <h1>Minesweeper</h1>
-        <div class="presets" role="group" aria-label="Difficulty presets">
-          <button class="preset" data-level="beginner" type="button">Beginner</button>
-          <button class="preset" data-level="intermediate" type="button">Intermediate</button>
-          <button class="preset" data-level="expert" type="button">Expert</button>
-          <button class="preset" data-level="custom" type="button">Custom</button>
+        <h1>Star Miner: Tractor Frontier</h1>
+        <div class="header-actions">
+          <button id="lab-toggle" type="button">Ship Lab</button>
+          <button id="pause-btn" type="button">Pause</button>
         </div>
       </header>
 
-      <section class="controls" aria-label="Custom board settings">
-        <label>Rows <input id="rows" type="number" min="6" max="24" value="9" /></label>
-        <label>Cols <input id="cols" type="number" min="6" max="30" value="9" /></label>
-        <label>Mines <input id="mines" type="number" min="5" value="10" /></label>
-        <button id="new-game" type="button">New game</button>
+      <section class="hud" aria-label="Game stats">
+        <p>🌌 Galaxy: <span id="galaxy">1</span></p>
+        <p>🔋 Energy: <span id="energy">100</span></p>
+        <p>⛏️ Ore: <span id="ore">0</span></p>
+        <p>💎 Crystal: <span id="crystal">0</span></p>
       </section>
 
-      <section class="hud">
-        <p>⛳ Mines left: <span id="mine-count">000</span></p>
-        <button id="reset-face" class="face" type="button" aria-label="Restart game">🙂</button>
-        <p>⏱ Time: <span id="timer">000</span></p>
+      <section class="hud secondary">
+        <p>🧲 Beam: <span id="beam-level">Mk I</span></p>
+        <p>🔧 Tool: <span id="tool-name">Laser Drill</span></p>
+        <p>🚀 Travel unlock at: <span id="travel-target">150 ore + 40 crystal</span></p>
       </section>
 
-      <p id="message" class="message">Left-click to reveal, right-click to flag, double-click number to chord.</p>
-      <section id="board" class="board" aria-label="Minesweeper board"></section>
+      <section class="arena-wrap">
+        <canvas id="arena" width="420" height="700" aria-label="Space mining arena"></canvas>
+      </section>
+
+      <section class="controls" aria-label="Mining tools and actions">
+        <button class="tool" data-tool="laser">Laser Drill (free)</button>
+        <button class="tool" data-tool="plasma">Plasma Cutter (20 ore)</button>
+        <button class="tool" data-tool="quantum">Quantum Fracturer (35 ore + 12 crystal)</button>
+        <button id="travel-btn" type="button">Jump to Next Galaxy</button>
+      </section>
+
+      <p id="message" class="message">Tap asteroids to capture them in your tractor beam, then mine them.</p>
+
+      <section id="lab-panel" class="lab-panel" hidden>
+        <h2>On-Ship Laboratory</h2>
+        <p class="lab-note">Queue upgrades that finish over time while you keep mining.</p>
+        <div class="lab-grid">
+          <button class="lab-upgrade" data-lab="beam">Beam Focus (+capture speed) <span id="cost-beam">45 ore</span></button>
+          <button class="lab-upgrade" data-lab="scanner">Deep Scanner (+asteroid value) <span id="cost-scanner">30 ore + 10 crystal</span></button>
+          <button class="lab-upgrade" data-lab="battery">Fusion Battery (+max energy) <span id="cost-battery">50 ore + 20 crystal</span></button>
+        </div>
+        <ul id="lab-queue" class="lab-queue"></ul>
+      </section>
     </main>
 
     <script src="script.js"></script>
